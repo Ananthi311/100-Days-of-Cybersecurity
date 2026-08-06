@@ -25,7 +25,7 @@ Understand how devices communicate with the Internet using Private IP, Public IP
 A Private IP is used for communication inside a local network.
 
 Example:
-10.254.185.3
+10.254.xxx.x
 
 ---
 
