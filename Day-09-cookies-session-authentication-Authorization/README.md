@@ -1,88 +1,60 @@
-# Day 9 — Cookies, Sessions & Authentication 🔐
+Day 9 — Cookies, Sessions & Authentication 🔐
 
 Today I learned how Cookies, Sessions, and Authentication work together behind a website login.
 
-## 🔄 Complete Flow
-
+🔄 Complete Flow
 User Login
-↓
+    ↓
 Authentication
-↓
+    ↓
 Session Creation
-↓
+    ↓
 Session ID
-↓
+    ↓
 Set-Cookie
-↓
+    ↓
 Browser Stores Cookie
-↓
+    ↓
 Browser Sends Cookie with Requests
-↓
+    ↓
 Server Validates Session
-↓
+    ↓
 Access Granted / Denied
-
----
-
-## 🧠 Key Concepts
-
-### 1. Cookie 🍪
+Key Concepts
+Cookie 🍪
 
 A cookie is small data stored by the browser.
-
-The server can send a cookie using:
-
-```http
 Set-Cookie: session_id=ABC123
-
-The browser stores it and can send it back in future requests:
-
+The browser stores it and sends it with future requests:
 Cookie: session_id=ABC123
-2. Session 🔐
+Session 🔐
 
 A session represents the user's authenticated state on the server.
-
-Example:
-
 Session ID: ABC123
 User: User123
 Status: Authenticated
+Authentication vs Authorization
 
-The browser usually keeps the session identifier in a cookie.
+Authentication → Who are you?
 
-3. Authentication vs Authorization
-
+Authorization → What are you allowed to do?
+Login
+  ↓
 Authentication
-
-Who are you?
-
-Example:
-
-Username + Password
-        ↓
-Server verifies identity
-        ↓
-Authentication successful ✅
-
+  ↓
+Session
+  ↓
 Authorization
+  ↓
+Allow / Deny
 
-What are you allowed to do?
-
-Example:
-
-Normal User → View own profile ✅
-Normal User → Admin settings ❌
-
-
-Admin → Admin settings ✅
-🛡️ Cookie Security Flags
+🛡️ Cookie Security
 HttpOnly
 
 Prevents JavaScript from directly reading the cookie.
-
 document.cookie
       ↓
-HttpOnly cookie
+HttpOnly Cookie
       ↓
 ❌ Not accessible
 Secure
@@ -91,70 +63,60 @@ Cookie is sent only over HTTPS.
 
 HTTPS → Cookie ✅
 HTTP  → Cookie ❌
+
 SameSite
 
-Controls how cookies behave in cross-site contexts.
-
-Common values:
+Controls cookie behavior in cross-site contexts.
 
 Strict → Most restrictive
 Lax    → Balanced
 None   → Cross-site cookies allowed
+
 ⏳ Session Expiration
 
-A session doesn't remain valid forever.
+Sessions don't remain valid forever.
 
-Idle Timeout
-No activity
-    ↓
+Session Created
+      ↓
 Timeout
-    ↓
-Session expires
-Absolute Timeout
-Session created
-    ↓
-Maximum lifetime reached
-    ↓
-Session expires
-
-Even if the browser still has the old cookie, the server can reject the expired session.
+      ↓
+Session Expired
+      ↓
+Login Required
 
 🚪 Logout & Session Invalidation
-
-Logout is more than just deleting a browser cookie.
-
-Typical flow:
-
 User clicks Logout
         ↓
-Logout request
+Logout Request
         ↓
-Server invalidates session
+Server invalidates Session
         ↓
 Cookie cleared / expired
         ↓
-User requests protected page
+Protected page requested
         ↓
 Session invalid ❌
         ↓
-Login required
-Important takeaway
+Login Required
+
+Important:
+
 Logout
 =
-Server-side Session Invalidation
+Session Invalidation
 +
-Cookie Clearance/Expiration
+Cookie Clearance / Expiration
 🧪 Practical Commands
-Check HTTP response headers
+Check response headers
 curl -I https://github.com
-Observe HTTP → HTTPS redirect
+HTTP → HTTPS redirect
 curl -I http://github.com
 
 Example:
 
 HTTP/1.1 301 Moved Permanently
 Location: https://github.com/
-Check a 403 response
+Check 403 response
 curl -I https://httpbin.org/status/403
 Cookie practical
 https://httpbin.org/cookies
@@ -178,10 +140,7 @@ Application
 Cookies
    ↓
 HttpOnly / Secure / SameSite
-🎯 What I understood today
-
-The biggest takeaway from Day 9:
-
+🎯 Day 9 Takeaway
 Login
   ↓
 Authentication
@@ -190,24 +149,20 @@ Session Creation
   ↓
 Session ID → Cookie
   ↓
-Browser stores Cookie
+Browser Stores Cookie
   ↓
 Cookie sent with requests
   ↓
 Server validates Session
   ↓
-Access granted
+Access Granted
   ↓
 Logout
   ↓
-Session invalidated
+Session Invalidated
   ↓
-Access denied
+Access Denied
 
-This helped me understand how browser-side cookies and server-side sessions work together to maintain authentication.
+Today I connected HTTP, Cookies, Sessions, Authentication, Authorization and Web Security into one complete flow.
 
 #Day9 #CyberSecurity #WebSecurity #Networking #HTTP #Cookies #Sessions #Authentication
-
-
-
-**GitHub-க்கு இது better format** — headings, code blocks, flow diagrams எல்லாம் clean-aa render ஆகும்.
